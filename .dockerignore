@@ -1,0 +1,35 @@
+# Файлы, связанные с настройками и средой разработки
+.env
+.env.*
+.pyenv
+.vscode/
+.idea/
+*.pyc
+*.pyo
+
+# Файлы и директории, созданные в процессе сборки или выполнения приложения Django
+__pycache__/
+staticfiles/
+media/
+
+# Временные файлы и кэш Django
+*.log
+*.swp
+*.swo
+db.sqlite3
+*.sqlite3
+*.db
+
+# Другие файлы и директории, которые можно исключить
+node_modules/
+bower_components/
+*.bak
+*.zip
+*.rar
+*.gz
+*.tar
+*.tar.gz
+*.tgz
+*.bz2
+*.xz
+.DS_Store

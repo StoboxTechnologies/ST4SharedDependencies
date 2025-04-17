@@ -1,0 +1,8 @@
+services:
+  stobox_dependencies:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+    volumes:
+      - .:/app
