@@ -7,10 +7,10 @@ from fastapi import Response
 from fastapi.exception_handlers import http_exception_handler
 from fastapi.responses import JSONResponse
 
-from dependencies.exceptions import AuthError
-from dependencies.exceptions import DoesNotExistError
-from dependencies.exceptions import HTTPClientError
-from dependencies.exceptions import ValidationError
+from stobox_dependencies.exceptions import AuthError
+from stobox_dependencies.exceptions import DoesNotExistError
+from stobox_dependencies.exceptions import HTTPClientError
+from stobox_dependencies.exceptions import ValidationError
 
 logger = logging.getLogger(__name__)
 

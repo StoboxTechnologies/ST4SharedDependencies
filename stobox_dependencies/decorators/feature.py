@@ -3,8 +3,8 @@ import functools
 from fastapi import HTTPException
 from starlette import status
 
-from dependencies.clients import payment_client
-from dependencies.settings.constants import ErrorMessages
+from stobox_dependencies.clients import payment_client
+from stobox_dependencies.settings.constants import ErrorMessages
 
 
 def feature_validating(feature: str):

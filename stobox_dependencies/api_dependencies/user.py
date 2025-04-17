@@ -4,12 +4,12 @@ from typing import Any
 from fastapi import Depends
 from fastapi import HTTPException
 
-from dependencies.api_dependencies.auth import current_user_id
-from dependencies.api_dependencies.auth import validate_access_token
-from dependencies.clients import user_client
-from dependencies.schemes.user import ACTIVE_USER_STATUSES
-from dependencies.schemes.user import UserKYCState
-from dependencies.settings.constants import ErrorMessages
+from stobox_dependencies.api_dependencies.auth import current_user_id
+from stobox_dependencies.api_dependencies.auth import validate_access_token
+from stobox_dependencies.clients import user_client
+from stobox_dependencies.schemes.user import ACTIVE_USER_STATUSES
+from stobox_dependencies.schemes.user import UserKYCState
+from stobox_dependencies.settings.constants import ErrorMessages
 
 
 async def active_user(token_payload: dict[str, Any] = Depends(validate_access_token)) -> None:

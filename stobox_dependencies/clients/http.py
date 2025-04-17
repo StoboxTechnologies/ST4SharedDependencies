@@ -6,8 +6,8 @@ from urllib.parse import urljoin
 import httpx
 from pydantic import HttpUrl
 
-from dependencies.exceptions import HTTPClientError
-from dependencies.settings.constants import BASE_HTTP_CLIENT_TIMEOUT
+from stobox_dependencies.exceptions import HTTPClientError
+from stobox_dependencies.settings.constants import BASE_HTTP_CLIENT_TIMEOUT
 
 logger = logging.getLogger(__name__)
 

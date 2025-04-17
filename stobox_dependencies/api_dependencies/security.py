@@ -2,11 +2,11 @@ from fastapi import Depends
 from fastapi import Header
 from pydantic import ValidationError
 
-from dependencies.api_dependencies.auth import current_user_id
-from dependencies.api_dependencies.auth import get_access_token
-from dependencies.clients import user_client
-from dependencies.exceptions import HTTPClientError
-from dependencies.settings.constants import ErrorMessages
+from stobox_dependencies.api_dependencies.auth import current_user_id
+from stobox_dependencies.api_dependencies.auth import get_access_token
+from stobox_dependencies.clients import user_client
+from stobox_dependencies.exceptions import HTTPClientError
+from stobox_dependencies.settings.constants import ErrorMessages
 
 
 async def validate_otp(

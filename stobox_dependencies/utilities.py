@@ -1,7 +1,7 @@
 import toml
 
-from dependencies.settings.conf import Env
-from dependencies.settings.conf import settings
+from stobox_dependencies.settings.conf import Env
+from stobox_dependencies.settings.conf import settings
 
 
 def get_version_and_project_name(file_path: str) -> tuple[str, str]:

@@ -9,10 +9,10 @@ from fastapi.security import HTTPAuthorizationCredentials
 from fastapi.security import HTTPBearer
 from sentry_sdk import set_tag
 
-from dependencies.settings.constants import AWS_COGNITO_URL
-from dependencies.settings.constants import JWK_URL
-from dependencies.settings.constants import JWT_ACCESS_TOKEN_ALGORITHMS
-from dependencies.settings.constants import ErrorMessages
+from stobox_dependencies.settings.constants import AWS_COGNITO_URL
+from stobox_dependencies.settings.constants import JWK_URL
+from stobox_dependencies.settings.constants import JWT_ACCESS_TOKEN_ALGORITHMS
+from stobox_dependencies.settings.constants import ErrorMessages
 
 logger = logging.getLogger(__name__)
 

@@ -3,9 +3,9 @@ from http import HTTPStatus
 from fastapi import Depends
 from fastapi import HTTPException
 
-from dependencies.api_dependencies.auth import current_user_id
-from dependencies.clients import payment_client
-from dependencies.settings.constants import ErrorMessages
+from stobox_dependencies.api_dependencies.auth import current_user_id
+from stobox_dependencies.clients import payment_client
+from stobox_dependencies.settings.constants import ErrorMessages
 
 
 async def feature_enabled(

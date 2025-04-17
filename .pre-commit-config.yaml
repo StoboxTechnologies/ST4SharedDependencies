@@ -4,22 +4,22 @@ repos:
     hooks:
       - id: trailing-whitespace
         args: [ --markdown-linebreak-ext=md ]
-        files: ^dependencies/.*\.py$
+        files: ^stobox_dependencies/.*\.py$
       - id: end-of-file-fixer
         exclude: static|README.md|release_notes
-        files: ^dependencies/.*\.py$
+        files: ^stobox_dependencies/.*\.py$
       - id: check-docstring-first
-        files: ^dependencies/.*\.py$
+        files: ^stobox_dependencies/.*\.py$
       - id: debug-statements
-        files: ^dependencies/.*\.py$
+        files: ^stobox_dependencies/.*\.py$
       - id: double-quote-string-fixer
-        files: ^dependencies/.*\.py$
+        files: ^stobox_dependencies/.*\.py$
   - repo: https://github.com/psf/black
     rev: 23.7.0
     hooks:
       - id: black
         args: [ --line-length=120, -S ]
-        files: ^dependencies/.*\.py$
+        files: ^stobox_dependencies/.*\.py$
   - repo: https://github.com/pycqa/flake8
     rev: 6.0.0
     hooks:
@@ -39,7 +39,7 @@ repos:
           - "--classmethod-decorators=classmethod"
           - "--whitelist=whitelist.txt"
           - "--config=.flake8"
-        files: ^dependencies/.*\.py$
+        files: ^stobox_dependencies/.*\.py$
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.5.1
     hooks:
@@ -52,13 +52,13 @@ repos:
     hooks:
       - id: mypy
         name: Mypy check
-        entry: sh -c 'mypy --config-file=.mypy.ini dependencies || exit 1'
+        entry: sh -c 'mypy --config-file=.mypy.ini stobox_dependencies || exit 1'
         language: system
         pass_filenames: false
-        files: ^dependencies/.*\.py$
+        files: ^stobox_dependencies/.*\.py$
       - id: bandit-security-check
         name: Bandit security check
         entry: bandit
         args: [ -q, -x, test ]
         language: system
-        files: dependencies/
+        files: stobox_dependencies/

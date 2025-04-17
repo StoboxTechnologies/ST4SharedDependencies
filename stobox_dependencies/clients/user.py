@@ -1,8 +1,8 @@
 from pydantic import HttpUrl
 
-from dependencies.clients.http import BaseHTTPClient
-from dependencies.schemes.user import User
-from dependencies.settings.conf import settings
+from stobox_dependencies.clients.http import BaseHTTPClient
+from stobox_dependencies.schemes.user import User
+from stobox_dependencies.settings.conf import settings
 
 
 class UserHTTPClient(BaseHTTPClient):
