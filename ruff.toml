@@ -19,6 +19,3 @@ docstring-quotes = "double"
 inline-quotes = "single"
 multiline-quotes = "double"
 avoid-escape = false
-
-
-

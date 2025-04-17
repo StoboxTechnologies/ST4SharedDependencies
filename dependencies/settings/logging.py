@@ -3,8 +3,8 @@ from copy import deepcopy
 import ujson
 from pythonjsonlogger.json import JsonFormatter
 
-from dependencies import settings
 from dependencies.settings.conf import Env
+from dependencies.settings.conf import settings
 
 
 class BaseJsonFormatter(JsonFormatter):

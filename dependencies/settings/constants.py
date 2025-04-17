@@ -1,4 +1,4 @@
-from dependencies import settings
+from dependencies.settings.conf import settings
 
 BASE_HTTP_CLIENT_TIMEOUT = 3.0
 JWT_ACCESS_TOKEN_ALGORITHMS = ['RS256']

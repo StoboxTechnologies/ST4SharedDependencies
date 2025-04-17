@@ -1,8 +1,8 @@
 from pydantic import HttpUrl
 
-from dependencies import settings
 from dependencies.clients.http import BaseHTTPClient
 from dependencies.schemes.user import User
+from dependencies.settings.conf import settings
 
 
 class UserHTTPClient(BaseHTTPClient):

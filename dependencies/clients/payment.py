@@ -1,7 +1,7 @@
 from pydantic import HttpUrl
 
-from dependencies import settings
 from dependencies.clients.http import BaseHTTPClient
+from dependencies.settings.conf import settings
 
 
 class PaymentHTTPClient(BaseHTTPClient):
