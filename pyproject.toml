@@ -1,0 +1,63 @@
+[tool.poetry]
+name = "stobox_dependencies"
+version = "1.1.0"
+description = "Stobox dependencies"
+authors = []
+license = ""
+
+[tool.poetry.dependencies]
+python = "^3.12.4"
+fastapi = "^0.115.12"
+pydantic-settings = "^2.8.1"
+python-json-logger = "^3.3.0"
+httpx = "^0.28.1"
+pyjwt = "^2.10.1"
+cryptography = "^44.0.2"
+ujson = "^5.10.0"
+sentry-sdk = "^2.26.1"
+
+
+[tool.poetry.group.dev.dependencies]
+ipdb = "==0.13.13"
+black = "==23.7.0"
+darglint = "==1.8.1"
+factory_boy = "==3.3.0"
+flake8 = "==6.0.0"
+flake8-bandit = "==4.1.1"
+flake8-comprehensions = "==3.14.0"
+flake8-eradicate = "==1.5.0"
+flake8-isort = "==6.0.0"
+flake8-spellcheck = "==0.28.0"
+bandit = "==1.7.4"
+isort = "==5.12.0"
+pep8-naming = "==0.13.3"
+pre-commit = "==3.3.3"
+pre-commit-hooks = "==4.4.0"
+safety = "==2.4.0b1"
+pytest = "^8.2.2"
+pytest-asyncio = "^0.23.7"
+mypy = "^1.10.0"
+types-toml = "^0.10.8.20240310"
+types-ujson = "^5.10.0.20240515"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+target-version = ['py310']
+line-length = 120
+skip-string-normalization = true
+exclude = '''
+(
+    \.venv
+)
+'''
+
+[tool.isort]
+profile = "black"
+force_single_line = true
+order_by_type = false
+line_length = 120
+skip = '.venv'
+src_paths = ['dependencies']
