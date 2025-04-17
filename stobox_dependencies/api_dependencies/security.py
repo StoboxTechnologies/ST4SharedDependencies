@@ -2,10 +2,11 @@ from fastapi import Depends
 from fastapi import Header
 from pydantic import ValidationError
 
-from stobox_dependencies.api_dependencies.auth import current_user_id
 from stobox_dependencies.api_dependencies.auth import get_access_token
+from stobox_dependencies.api_dependencies.user import get_user_info
 from stobox_dependencies.clients import user_client
 from stobox_dependencies.exceptions import HTTPClientError
+from stobox_dependencies.schemes.user import User
 from stobox_dependencies.settings.constants import ErrorMessages
 
 
@@ -21,15 +22,10 @@ async def validate_otp(
 
 async def validate_2fa(
     secret_2fa: str | None = Header(None),
-    user_id: int = Depends(current_user_id),
+    user: User = Depends(get_user_info),
     token: str = Depends(get_access_token),
 ) -> None:
-    try:
-        user_info = await user_client.get_user_info(user_id)
-    except HTTPClientError:
-        raise ValidationError(ErrorMessages.INVALID_2FA)
-
-    if not user_info.is_2fa_enabled:
+    if not user.is_2fa_enabled:
         return
 
     if secret_2fa is None:
