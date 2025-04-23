@@ -62,11 +62,10 @@ LOG_CONFIG = {
         },
     },
     'loggers': {
-        'stobox_dependencies': {'handlers': ['default'], 'level': log_level},
         'uvicorn': {'handlers': ['default'], 'level': log_level},
         'gunicorn': {'handlers': ['default'], 'level': log_level},
         'gunicorn.access': {'handlers': ['default'], 'level': log_level},
         'gunicorn.error': {'handlers': ['default'], 'level': log_level},
     },
-    'root': {'handlers': [], 'level': log_level},
+    'root': {'handlers': ['default'], 'level': log_level},
 }
