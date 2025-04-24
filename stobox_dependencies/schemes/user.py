@@ -7,6 +7,8 @@ class UserStatus(StrEnum):
     NEW = 'NEW'
     ACTIVE = 'ACTIVE'
     SUSPENDED = 'SUSPENDED'
+    DISABLED = 'DISABLED'
+    OFFLINE = 'OFFLINE'
 
 
 class UserKYCState(StrEnum):
