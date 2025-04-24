@@ -1,11 +1,11 @@
 from fastapi import Depends
 from fastapi import Header
-from pydantic import ValidationError
 
 from stobox_dependencies.api_dependencies.auth import get_access_token
 from stobox_dependencies.api_dependencies.user import get_user_info
 from stobox_dependencies.clients import user_client
 from stobox_dependencies.exceptions import HTTPClientError
+from stobox_dependencies.exceptions import ValidationError
 from stobox_dependencies.schemes.user import User
 from stobox_dependencies.settings.constants import ErrorMessages
 
