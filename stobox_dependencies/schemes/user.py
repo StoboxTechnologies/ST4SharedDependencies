@@ -20,7 +20,11 @@ class UserKYCState(StrEnum):
 
 class User(BaseModel):
     id: int
+    country_code: str | None
     is_2fa_enabled: bool
+    first_name: str | None
+    last_name: str | None
+    email: str
     referral_code: str
     kyc_state: UserKYCState
     status: UserStatus
