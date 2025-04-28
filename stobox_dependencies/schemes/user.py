@@ -17,6 +17,7 @@ class UserKYCState(StrEnum):
     APPROVED = 'APPROVED'
     REJECTED = 'REJECTED'
 
+
 class UserFractalState(StrEnum):
     NOT_STARTED = 'NOT_STARTED'
     PENDING = 'PENDING'
