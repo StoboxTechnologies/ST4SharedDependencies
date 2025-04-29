@@ -9,6 +9,7 @@ from stobox_dependencies.api_dependencies.auth import validate_access_token
 from stobox_dependencies.clients import user_client
 from stobox_dependencies.schemes.user import ACTIVE_USER_STATUSES
 from stobox_dependencies.schemes.user import User
+from stobox_dependencies.schemes.user import UserFractalState
 from stobox_dependencies.schemes.user import UserKYCState
 from stobox_dependencies.settings.constants import ErrorMessages
 
@@ -28,7 +29,7 @@ async def get_user_info(user_id: int = Depends(current_user_id)) -> User:
 
 
 async def kyc_approved_user(user: User = Depends(get_user_info)) -> None:
-    if user.kyc_state != UserKYCState.APPROVED:
+    if user.kyc_state != UserKYCState.APPROVED or user.fractal_state != UserFractalState.APPROVED:
         raise HTTPException(
             status_code=HTTPStatus.FORBIDDEN,
             detail=ErrorMessages.FORBIDDEN_ACCESS_KYC_STATE,
