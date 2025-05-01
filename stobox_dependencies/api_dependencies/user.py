@@ -29,9 +29,11 @@ async def get_user_info(user_id: int = Depends(current_user_id)) -> User:
 
 
 async def kyc_approved_user(user: User = Depends(get_user_info)) -> None:
-    if user.kyc_state != UserKYCState.APPROVED or user.fractal_state != UserFractalState.APPROVED:
-        raise HTTPException(
-            status_code=HTTPStatus.FORBIDDEN,
-            detail=ErrorMessages.FORBIDDEN_ACCESS_KYC_STATE,
-            headers={'WWW-Authenticate': 'Bearer'},
-        )
+    if user.kyc_state == UserKYCState.APPROVED or user.fractal_state == UserFractalState.APPROVED:
+        return
+
+    raise HTTPException(
+        status_code=HTTPStatus.FORBIDDEN,
+        detail=ErrorMessages.FORBIDDEN_ACCESS_KYC_STATE,
+        headers={'WWW-Authenticate': 'Bearer'},
+    )
