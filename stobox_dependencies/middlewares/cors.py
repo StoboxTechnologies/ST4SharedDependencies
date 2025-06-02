@@ -5,15 +5,11 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.middleware.base import RequestResponseEndpoint
 from starlette.requests import Request
 from starlette.responses import Response
-from starlette.types import ASGIApp
 
 from stobox_dependencies.settings.conf import settings
 
 
 class DynamicCORSMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app: ASGIApp):
-        super().__init__(app)
-
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint):
         origin = request.headers.get('origin')
         allowed_origins = await self.get_allowed_origins()

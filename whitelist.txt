@@ -47,3 +47,4 @@ poolclass
 otp
 kyc
 stobox
+aioboto3
