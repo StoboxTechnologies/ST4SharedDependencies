@@ -32,6 +32,10 @@ class Settings(BaseSettings):
 
     AWS_DEFAULT_REGION: str = 'ue-west-1'
     COGNITO_POOL_ID: str = 'eu-west-1_123456789'
+    AWS_ACCESS_KEY_ID: str = ''
+    AWS_SECRET_ACCESS_KEY: str = ''
+    ALLOWED_ORIGINS_TABLE_NAME: str = 'allowed_origins'
+
     PAYMENT_SERVICE_URL: HttpUrl = HttpUrl('http://localhost:5000')
     USER_MANAGER_URL: HttpUrl = HttpUrl('http://localhost:5001')
 
