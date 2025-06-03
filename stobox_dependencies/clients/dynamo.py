@@ -14,6 +14,9 @@ class DynamoClient(AWSClient):
         )
 
     async def get_cors_domains(self) -> list[str]:
+        if not self.client:
+            await self.configure(settings.AWS_DEFAULT_REGION)
+
         table = await self.client.Table(settings.ALLOWED_ORIGINS_TABLE_NAME)
         scan_response = await table.scan(AttributesToGet=['origin'])
         return [item['origin'] for item in scan_response.get('Items', [])]
