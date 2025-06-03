@@ -6,11 +6,15 @@ from starlette.middleware.base import RequestResponseEndpoint
 from starlette.requests import Request
 from starlette.responses import Response
 
+from stobox_dependencies.settings.conf import Env
 from stobox_dependencies.settings.conf import settings
 
 
 class DynamicCORSMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next: RequestResponseEndpoint):
+        if settings.ENV == Env.TESTING:
+            return await call_next(request)
+
         origin = request.headers.get('origin')
         allowed_origins = await self.get_allowed_origins()
 
