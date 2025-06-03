@@ -31,3 +31,6 @@ class AuthError(Exception):
 
 class ValidationError(Exception):
     pass
+
+class AWSClientError(Exception):
+    pass
