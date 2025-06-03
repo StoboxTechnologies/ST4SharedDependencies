@@ -9,6 +9,8 @@ class Env(str, Enum):
     TESTING = 'TESTING'
     LOCAL = 'LOCAL'
     DEV = 'DEV'
+    DEV_1 = 'DEV_1'
+    DEV_2 = 'DEV_2'
     STAGING = 'STAGING'
     PRODUCTION = 'PRODUCTION'
 
