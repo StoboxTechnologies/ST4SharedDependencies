@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 class AWSClient:
     CLIENT_TYPE: str
+    IS_RESOURCE_CLIENT: bool = False
 
     def __init__(self):
         self._client = None
@@ -31,9 +32,14 @@ class AWSClient:
         return self._client
 
     async def configure(self, region: str = settings.AWS_DEFAULT_REGION):
-        self._client = await self._context_stack.enter_async_context(
-            self.session.client(self.CLIENT_TYPE, region_name=region)
-        )
+        if self.IS_RESOURCE_CLIENT:
+            self._client = await self._context_stack.enter_async_context(
+                self.session.resource(self.CLIENT_TYPE, region_name=region)
+            )
+        else:
+            self._client = await self._context_stack.enter_async_context(
+                self.session.client(self.CLIENT_TYPE, region_name=region)
+            )
         logger.info({'message': f'AWS {self.CLIENT_TYPE.upper()} client has been configured.'})
 
     async def close(self):
