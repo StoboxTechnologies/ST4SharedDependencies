@@ -12,6 +12,7 @@ class KYBState(StrEnum):
 
 
 class Company(BaseModel):
+    id: int
     ref: str
     name: str | None
     country: str | None
