@@ -10,6 +10,7 @@ class ErrorMessages:
     INVALID_ACCESS_TOKEN = 'Invalid access token'  # nosec # noqa S105
     FORBIDDEN_ACCESS_INACTIVE_USER = 'Forbidden access for inactive user'
     FORBIDDEN_ACCESS_KYC_STATE = 'Forbidden access for KYC state'
+    FORBIDDEN_ACCESS_KYB_STATE = 'Forbidden access for KYB state'
     FEATURE_NOT_ENABLED = 'Feature {feature} is not enabled for user'
 
     INVALID_OTP = 'Invalid OTP'
