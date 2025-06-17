@@ -20,6 +20,6 @@ async def kyb_approved_company(company: Company = Depends(get_public_company_inf
 
     raise HTTPException(
         status_code=HTTPStatus.FORBIDDEN,
-        detail=ErrorMessages.FORBIDDEN_ACCESS_KYC_STATE,
+        detail=ErrorMessages.FORBIDDEN_ACCESS_KYB_STATE,
         headers={'WWW-Authenticate': 'Bearer'},
     )
