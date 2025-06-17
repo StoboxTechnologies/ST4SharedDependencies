@@ -10,7 +10,7 @@ from stobox_dependencies.settings.constants import ErrorMessages
 
 
 async def get_company_info(company_id: int) -> Company:
-    user_info = await company_client.get_company_info(company_id)
+    user_info = await company_client.get_public_company_info(company_id)
     return user_info
 
 
