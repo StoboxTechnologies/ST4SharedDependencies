@@ -39,6 +39,7 @@ class User(BaseModel):
     fractal_state: UserFractalState
     status: UserStatus
     has_did: bool | None = None
+    stripe_customer_id: str | None = None
 
 
 ACTIVE_USER_STATUSES = (UserStatus.ACTIVE, UserStatus.NEW)
