@@ -18,15 +18,6 @@ class UserKYCState(StrEnum):
     REJECTED = 'REJECTED'
 
 
-class UserFractalState(StrEnum):
-    NOT_STARTED = 'NOT_STARTED'
-    PENDING = 'PENDING'
-    WAITING_SIGNATURE = 'WAITING_SIGNATURE'
-    APPROVED = 'APPROVED'
-    REJECTED = 'REJECTED'
-    DISABLED = 'DISABLED'
-
-
 class User(BaseModel):
     id: int
     country_code: str | None
@@ -36,7 +27,6 @@ class User(BaseModel):
     email: str
     referral_code: str
     kyc_state: UserKYCState
-    fractal_state: UserFractalState
     status: UserStatus
     has_did: bool | None = None
 
