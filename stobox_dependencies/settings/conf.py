@@ -41,6 +41,7 @@ class Settings(BaseSettings):
     PAYMENT_SERVICE_URL: HttpUrl = HttpUrl('http://localhost:5000')
     USER_MANAGER_URL: HttpUrl = HttpUrl('http://localhost:5001')
     COMPANY_MANAGER_URL: HttpUrl = HttpUrl('http://localhost:5002')
+    PUBLIC_PAGE_URL: HttpUrl = HttpUrl('http://localhost:5003')
 
 
 settings = Settings()
