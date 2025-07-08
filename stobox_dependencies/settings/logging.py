@@ -12,9 +12,10 @@ from stobox_dependencies.settings.router import session_id_var
 
 class TracingFilter(Filter):
     def filter(self, record):
-        record.msg['session_id'] = session_id_var.get()
-        record.msg['request_id'] = request_id_var.get()
-        record.msg['user_ref'] = request_ref_var.get()
+        if isinstance(record.msg, dict):
+            record.msg['session_id'] = session_id_var.get()
+            record.msg['request_id'] = request_id_var.get()
+            record.msg['user_ref'] = request_ref_var.get()
         return True
 
 class BaseJsonFormatter(JsonFormatter):
