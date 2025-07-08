@@ -4,8 +4,6 @@ from stobox_dependencies.settings.conf import settings
 
 
 class CompanyHTTPClient(BaseHTTPClient):
-    BASE_URL = settings.COMPANY_MANAGER_URL
-
     class ROUTES:
         PUBLIC_COMPANY_INFO: str = '/companies/{company_id}/public'
 
