@@ -8,16 +8,28 @@ from pydantic import HttpUrl
 
 from stobox_dependencies.exceptions import HTTPClientError
 from stobox_dependencies.settings.constants import BASE_HTTP_CLIENT_TIMEOUT
+from stobox_dependencies.settings.router import request_id_var
+from stobox_dependencies.settings.router import user_ref_var
+from stobox_dependencies.settings.router import session_id_var
 
 logger = logging.getLogger(__name__)
 
 
 class BaseHTTPClient:
-    BASE_URL: HttpUrl
     EXC_CLASS: Type[HTTPClientError] = HTTPClientError
 
+    def __init__(self, base_url: HttpUrl):
+        self.base_url = str(base_url)
+
     def get_url(self, url: str) -> str:
-        return urljoin(str(self.BASE_URL), url)
+        return urljoin(self.base_url, url)
+
+    @staticmethod
+    def enrich_headers(headers: dict[str, str]) -> dict[str, str]:
+        headers['X-Session-Id'] = session_id_var.get()
+        headers['X-Request-Id'] = request_id_var.get()
+        headers['X-User-Ref'] = user_ref_var.get()
+        return headers
 
     async def get(self, url: str, **kwargs) -> httpx.Response:
         return await self._request('GET', url, **kwargs)
@@ -31,10 +43,11 @@ class BaseHTTPClient:
     async def _request(self, method: str, url: str, **kwargs) -> httpx.Response:
         url = self.get_url(url)
         self._before_request_log(url, method, **kwargs)
+        headers = self.enrich_headers(kwargs.pop('headers', {}))
 
         try:
             async with httpx.AsyncClient(timeout=BASE_HTTP_CLIENT_TIMEOUT) as client:
-                response = await client.request(method, url, **kwargs)
+                response = await client.request(method, url, headers=headers, **kwargs)
         except httpx.HTTPError as err:
             logger.exception({'message': str(err)})
             raise self.EXC_CLASS(status_code=HTTPStatus.INTERNAL_SERVER_ERROR, response_text=str(err), url=url)
