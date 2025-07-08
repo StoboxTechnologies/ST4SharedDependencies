@@ -12,9 +12,9 @@ from stobox_dependencies.settings.router import session_id_var
 
 class TracingFilter(Filter):
     def filter(self, record):
-        record.session_id = session_id_var.get()
-        record.request_id = request_id_var.get()
-        record.user_ref = request_ref_var.get()
+        record.msg['session_id'] = session_id_var.get()
+        record.msg['request_id'] = request_id_var.get()
+        record.msg['user_ref'] = request_ref_var.get()
         return True
 
 class BaseJsonFormatter(JsonFormatter):
@@ -24,9 +24,6 @@ class BaseJsonFormatter(JsonFormatter):
         super(BaseJsonFormatter, self).add_fields(log_record, record, message_dict)
         log_record['level'] = record.levelname
         log_record['logger'] = record.name
-        log_record['session_id'] = getattr(record, 'session_id', None)
-        log_record['request_id'] = getattr(record, 'request_id', None)
-        log_record['user_ref'] = getattr(record, 'user_ref', None)
         if isinstance(record.msg, dict):
             log_record['json'] = self._filter_json(deepcopy(record.msg.get('json', {})))
             log_record['text'] = self._filter_text(deepcopy(record.msg.get('text', '')))
