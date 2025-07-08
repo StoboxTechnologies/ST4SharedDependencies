@@ -80,5 +80,5 @@ class FastAPIExceptionHandlers:
         detail = exc.args[0] if exc.args else str(exc)
         return await http_exception_handler(
             request=request,
-            exc=HTTPException(status_code=HTTPStatus.UNPROCESSABLE_ENTITY, detail=detail[0]),
+            exc=HTTPException(status_code=HTTPStatus.UNPROCESSABLE_ENTITY, detail=detail),
         )
