@@ -29,6 +29,10 @@ class AuthError(Exception):
     pass
 
 
+class ForbiddenError(Exception):
+    pass
+
+
 class ValidationError(Exception):
     pass
 
