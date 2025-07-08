@@ -24,6 +24,9 @@ class BaseJsonFormatter(JsonFormatter):
         super(BaseJsonFormatter, self).add_fields(log_record, record, message_dict)
         log_record['level'] = record.levelname
         log_record['logger'] = record.name
+        log_record['session_id'] = getattr(record, 'session_id', None)
+        log_record['request_id'] = getattr(record, 'request_id', None)
+        log_record['user_ref'] = getattr(record, 'user_ref', None)
         if isinstance(record.msg, dict):
             log_record['json'] = self._filter_json(deepcopy(record.msg.get('json', {})))
             log_record['text'] = self._filter_text(deepcopy(record.msg.get('text', '')))
