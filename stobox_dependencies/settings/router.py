@@ -10,9 +10,9 @@ from fastapi.routing import Request
 from fastapi.routing import Response
 
 logger = logging.getLogger(__name__)
-session_id_var = ContextVar('session_id', default=None)
-request_id_var = ContextVar('request_id', default=None)
-user_ref_var = ContextVar('user_ref', default=None)
+session_id_var = ContextVar('session_id', default='')
+request_id_var = ContextVar('request_id', default='')
+user_ref_var = ContextVar('user_ref', default='')
 
 
 class LoggingRoute(APIRoute):
