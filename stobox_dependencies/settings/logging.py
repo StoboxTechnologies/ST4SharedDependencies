@@ -5,6 +5,8 @@ from pythonjsonlogger.json import JsonFormatter
 
 from stobox_dependencies.settings.conf import Env
 from stobox_dependencies.settings.conf import settings
+from stobox_dependencies.settings.router import request_id_var
+from stobox_dependencies.settings.router import session_id_var
 
 
 class BaseJsonFormatter(JsonFormatter):
@@ -14,6 +16,8 @@ class BaseJsonFormatter(JsonFormatter):
         super(BaseJsonFormatter, self).add_fields(log_record, record, message_dict)
         log_record['level'] = record.levelname
         log_record['logger'] = record.name
+        log_record['session_id'] = session_id_var.get()
+        log_record['request_id'] = request_id_var.get()
         if isinstance(record.msg, dict):
             log_record['json'] = self._filter_json(deepcopy(record.msg.get('json', {})))
             log_record['text'] = self._filter_text(deepcopy(record.msg.get('text', '')))
