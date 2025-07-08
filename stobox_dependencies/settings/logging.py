@@ -7,7 +7,7 @@ from pythonjsonlogger.json import JsonFormatter
 from stobox_dependencies.settings.conf import Env
 from stobox_dependencies.settings.conf import settings
 from stobox_dependencies.settings.router import request_id_var
-from stobox_dependencies.settings.router import request_ref_var
+from stobox_dependencies.settings.router import user_ref_var
 from stobox_dependencies.settings.router import session_id_var
 
 class TracingFilter(Filter):
@@ -15,7 +15,7 @@ class TracingFilter(Filter):
         if isinstance(record.msg, dict):
             record.msg['session_id'] = session_id_var.get()
             record.msg['request_id'] = request_id_var.get()
-            record.msg['user_ref'] = request_ref_var.get()
+            record.msg['user_ref'] = user_ref_var.get()
         return True
 
 class BaseJsonFormatter(JsonFormatter):
