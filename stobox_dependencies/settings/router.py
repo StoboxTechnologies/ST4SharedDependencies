@@ -57,9 +57,6 @@ class LoggingRoute(APIRoute):
 
         if response:
             response_data['status_code'] = str(response.status_code)
-            response.headers['X-Session-Id'] = session_id_var.get()  # type: ignore
-            response.headers['X-Request-Id'] = request_id_var.get()  # type: ignore
-            response.headers['X-User-Ref'] = user_ref_var.get()  # type: ignore
 
         if getattr(request.state, 'user', None):
             response_data['user_id'] = request.state.user.id
