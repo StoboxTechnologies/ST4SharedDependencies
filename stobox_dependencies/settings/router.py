@@ -23,7 +23,7 @@ class LoggingRoute(APIRoute):
         user_ref = request.headers.get('X-User-Ref')
         session_id_var.set(session_id or str(uuid.uuid4()))
         request_id_var.set(request_id or str(uuid.uuid4()))
-        request_id_var.set(user_ref)
+        request_ref_var.set(user_ref)
 
         body = await cls.get_request_body(request)
         return {
