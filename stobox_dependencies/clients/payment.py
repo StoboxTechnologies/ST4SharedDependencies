@@ -1,12 +1,7 @@
-from pydantic import HttpUrl
-
 from stobox_dependencies.clients.http import BaseHTTPClient
-from stobox_dependencies.settings.conf import settings
 
 
 class PaymentHTTPClient(BaseHTTPClient):
-    BASE_URL: HttpUrl = settings.PAYMENT_SERVICE_URL
-
     class ROUTES:
         CHECK_FEATURE: str = '/internal/payments/features/is-enabled'
 

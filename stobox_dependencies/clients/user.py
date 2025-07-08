@@ -1,13 +1,8 @@
-from pydantic import HttpUrl
-
 from stobox_dependencies.clients.http import BaseHTTPClient
 from stobox_dependencies.schemes.user import User
-from stobox_dependencies.settings.conf import settings
 
 
 class UserHTTPClient(BaseHTTPClient):
-    BASE_URL: HttpUrl = settings.USER_MANAGER_URL
-
     class ROUTES:
         USER_INFO: str = '/internal/users/{user_id}'
         OTP_VERIFY: str = '/users/security/otp/verify'

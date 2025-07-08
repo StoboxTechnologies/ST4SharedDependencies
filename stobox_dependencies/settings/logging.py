@@ -7,8 +7,9 @@ from pythonjsonlogger.json import JsonFormatter
 from stobox_dependencies.settings.conf import Env
 from stobox_dependencies.settings.conf import settings
 from stobox_dependencies.settings.router import request_id_var
-from stobox_dependencies.settings.router import user_ref_var
 from stobox_dependencies.settings.router import session_id_var
+from stobox_dependencies.settings.router import user_ref_var
+
 
 class TracingFilter(Filter):
     def filter(self, record):
@@ -17,6 +18,7 @@ class TracingFilter(Filter):
             record.msg['request_id'] = request_id_var.get()
             record.msg['user_ref'] = user_ref_var.get()
         return True
+
 
 class BaseJsonFormatter(JsonFormatter):
     SECURE_PARAMETERS = ('secret',)
