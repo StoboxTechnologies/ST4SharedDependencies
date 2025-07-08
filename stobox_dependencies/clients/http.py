@@ -9,8 +9,8 @@ from pydantic import HttpUrl
 from stobox_dependencies.exceptions import HTTPClientError
 from stobox_dependencies.settings.constants import BASE_HTTP_CLIENT_TIMEOUT
 from stobox_dependencies.settings.router import request_id_var
-from stobox_dependencies.settings.router import user_ref_var
 from stobox_dependencies.settings.router import session_id_var
+from stobox_dependencies.settings.router import user_ref_var
 
 logger = logging.getLogger(__name__)
 
@@ -26,9 +26,9 @@ class BaseHTTPClient:
 
     @staticmethod
     def enrich_headers(headers: dict[str, str]) -> dict[str, str]:
-        headers['X-Session-Id'] = session_id_var.get()
-        headers['X-Request-Id'] = request_id_var.get()
-        headers['X-User-Ref'] = user_ref_var.get()
+        headers['X-Session-Id'] = session_id_var.get()  # type: ignore
+        headers['X-Request-Id'] = request_id_var.get()  # type: ignore
+        headers['X-User-Ref'] = user_ref_var.get()  # type: ignore
         return headers
 
     async def get(self, url: str, **kwargs) -> httpx.Response:
