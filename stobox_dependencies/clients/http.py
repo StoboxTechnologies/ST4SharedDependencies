@@ -16,11 +16,13 @@ logger = logging.getLogger(__name__)
 
 
 class BaseHTTPClient:
-    BASE_URL: HttpUrl
     EXC_CLASS: Type[HTTPClientError] = HTTPClientError
 
+    def __init__(self, base_url: HttpUrl):
+        self.base_url = str(base_url)
+
     def get_url(self, url: str) -> str:
-        return urljoin(str(self.BASE_URL), url)
+        return urljoin(self.base_url, url)
 
     @staticmethod
     def enrich_headers(headers: dict[str, str]) -> dict[str, str]:
