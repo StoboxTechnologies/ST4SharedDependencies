@@ -41,13 +41,13 @@ class BaseHTTPClient:
         return await self._request('PATCH', url, **kwargs)
 
     async def _request(self, method: str, url: str, **kwargs) -> httpx.Response:
+        kwargs['headers'] = self.enrich_headers(kwargs.get('headers', {}))
         url = self.get_url(url)
         self._before_request_log(url, method, **kwargs)
-        headers = self.enrich_headers(kwargs.pop('headers', {}))
 
         try:
             async with httpx.AsyncClient(timeout=BASE_HTTP_CLIENT_TIMEOUT) as client:
-                response = await client.request(method, url, headers=headers, **kwargs)
+                response = await client.request(method, url, **kwargs)
         except httpx.HTTPError as err:
             logger.exception({'message': str(err)})
             raise self.EXC_CLASS(status_code=HTTPStatus.INTERNAL_SERVER_ERROR, response_text=str(err), url=url)
