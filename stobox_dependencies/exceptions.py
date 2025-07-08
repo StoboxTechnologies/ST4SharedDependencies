@@ -33,5 +33,9 @@ class ValidationError(Exception):
     pass
 
 
+class ValidationDetailedError(ValidationError):
+    pass
+
+
 class AWSClientError(Exception):
     pass
