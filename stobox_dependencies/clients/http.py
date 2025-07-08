@@ -26,9 +26,9 @@ class BaseHTTPClient:
 
     @staticmethod
     def enrich_headers(headers: dict[str, str]) -> dict[str, str]:
-        headers['X-Session-Id'] = session_id_var.get()  # type: ignore
-        headers['X-Request-Id'] = request_id_var.get()  # type: ignore
-        headers['X-User-Ref'] = user_ref_var.get()  # type: ignore
+        headers['X-Session-Id'] = session_id_var.get() or ''  # type: ignore
+        headers['X-Request-Id'] = request_id_var.get() or ''  # type: ignore
+        headers['X-User-Ref'] = user_ref_var.get() or ''  # type: ignore
         return headers
 
     async def get(self, url: str, **kwargs) -> httpx.Response:
