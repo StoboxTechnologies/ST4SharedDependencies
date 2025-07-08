@@ -12,6 +12,7 @@ from fastapi.routing import Response
 logger = logging.getLogger(__name__)
 session_id_var = ContextVar('session_id', default=None)
 request_id_var = ContextVar('request_id', default=None)
+request_ref_var = ContextVar('user_ref', default=None)
 
 
 class LoggingRoute(APIRoute):
@@ -19,8 +20,10 @@ class LoggingRoute(APIRoute):
     async def get_request_data(cls, request: Request) -> dict:
         session_id = request.headers.get('X-Session-Id')
         request_id = request.headers.get('X-Request-Id')
+        user_ref = request.headers.get('X-User-Ref')
         session_id_var.set(session_id or str(uuid.uuid4()))
         request_id_var.set(request_id or str(uuid.uuid4()))
+        request_id_var.set(user_ref)
 
         body = await cls.get_request_body(request)
         return {
@@ -56,6 +59,7 @@ class LoggingRoute(APIRoute):
             response_data['status_code'] = str(response.status_code)
             response.headers['X-Session-Id'] = session_id_var.get()  # type: ignore
             response.headers['X-Request-Id'] = request_id_var.get()  # type: ignore
+            response.headers['X-User-Ref'] = user_ref_var.get()  # type: ignore
 
         if getattr(request.state, 'user', None):
             response_data['user_id'] = request.state.user.id

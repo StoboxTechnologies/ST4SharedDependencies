@@ -1,4 +1,5 @@
 from copy import deepcopy
+from logging import Filter
 
 import ujson
 from pythonjsonlogger.json import JsonFormatter
@@ -6,8 +7,15 @@ from pythonjsonlogger.json import JsonFormatter
 from stobox_dependencies.settings.conf import Env
 from stobox_dependencies.settings.conf import settings
 from stobox_dependencies.settings.router import request_id_var
+from stobox_dependencies.settings.router import request_ref_var
 from stobox_dependencies.settings.router import session_id_var
 
+class TracingFilter(Filter):
+    def filter(self, record):
+        record.session_id = session_id_var.get()
+        record.request_id = request_id_var.get()
+        record.user_ref = request_ref_var.get()
+        return True
 
 class BaseJsonFormatter(JsonFormatter):
     SECURE_PARAMETERS = ('secret',)
@@ -16,8 +24,6 @@ class BaseJsonFormatter(JsonFormatter):
         super(BaseJsonFormatter, self).add_fields(log_record, record, message_dict)
         log_record['level'] = record.levelname
         log_record['logger'] = record.name
-        log_record['session_id'] = session_id_var.get()
-        log_record['request_id'] = request_id_var.get()
         if isinstance(record.msg, dict):
             log_record['json'] = self._filter_json(deepcopy(record.msg.get('json', {})))
             log_record['text'] = self._filter_text(deepcopy(record.msg.get('text', '')))
@@ -56,6 +62,11 @@ LOG_CONFIG = {
         },
         'local': {
             '()': 'logging.Formatter',
+        },
+    },
+    'filters': {
+        'tracing': {
+            '()': TracingFilter,
         },
     },
     'handlers': {
