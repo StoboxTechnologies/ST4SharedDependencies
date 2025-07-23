@@ -4,7 +4,6 @@ from contextvars import ContextVar
 from json import JSONDecodeError
 from typing import Callable
 
-import ujson
 from fastapi.routing import APIRoute
 from fastapi.routing import Request
 from fastapi.routing import Response
@@ -49,10 +48,15 @@ class LoggingRoute(APIRoute):
 
     @staticmethod
     def get_response_data(request: Request, response: Response | None = None) -> dict:
+        try:
+            response_body = ujson.loads(response.body.decode()) if response else None  # type: ignore
+        except Exception:
+            response_body = None
+
         response_data = {
             'url': request.url.path,
             'method': request.method,
-            'json': ujson.loads(response.body.decode()) if response else None,  # type: ignore
+            'json': response_body,
         }
 
         if response:
