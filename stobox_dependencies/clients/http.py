@@ -18,8 +18,9 @@ logger = logging.getLogger(__name__)
 class BaseHTTPClient:
     EXC_CLASS: Type[HTTPClientError] = HTTPClientError
 
-    def __init__(self, base_url: HttpUrl):
+    def __init__(self, base_url: HttpUrl, timeout: int = BASE_HTTP_CLIENT_TIMEOUT):
         self.base_url = str(base_url)
+        self.timeout = timeout
 
     def get_url(self, url: str) -> str:
         return urljoin(self.base_url, url)
@@ -46,7 +47,7 @@ class BaseHTTPClient:
         self._before_request_log(url, method, **kwargs)
 
         try:
-            async with httpx.AsyncClient(timeout=BASE_HTTP_CLIENT_TIMEOUT) as client:
+            async with httpx.AsyncClient(timeout=self.timeout) as client:
                 response = await client.request(method, url, **kwargs)
         except httpx.HTTPError as err:
             logger.exception({'message': str(err)})
