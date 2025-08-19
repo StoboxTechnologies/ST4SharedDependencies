@@ -28,16 +28,13 @@ class FeatureConsume:
     def __init__(self, feature: str):
         self.feature = feature
 
-    def __call__(self):
-        @asynccontextmanager
-        async def _manager(user_id: int = Depends(current_user_id)):
+    async def __call__(self, user_id: int = Depends(current_user_id)):
+        await FeatureEnabled(self.feature)(user_id)
 
-            yield
+        yield
 
-            consume_feature_data = UserFeatureConsumeSchema(
-                user_id=user_id,
-                feature_name=self.feature,
-            )
-            await payment_client.consume_user_feature(consume_feature_data)
-
-        return _manager()
+        consume_feature_data = UserFeatureConsumeSchema(
+            user_id=user_id,
+            feature_name=self.feature,
+        )
+        await payment_client.consume_user_feature(consume_feature_data)
