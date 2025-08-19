@@ -17,6 +17,6 @@ class PaymentHTTPClient(BaseHTTPClient):
     async def consume_user_feature(self, request_data: UserFeatureConsumeSchema) -> dict[str, bool]:
         response = await self.patch(
             url=self.ROUTES.CONSUME_USER_FEATURE,
-            json=request_data,
+            json=request_data.model_dump(),
         )
         return response.json()
