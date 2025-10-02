@@ -21,3 +21,4 @@ class Company(BaseModel):
     industry: str | None
     phone_number: str | None
     web_site: str | None
+    user_id: int
