@@ -4,6 +4,7 @@ from contextvars import ContextVar
 from json import JSONDecodeError
 from typing import Callable
 
+import ujson
 from fastapi.routing import APIRoute
 from fastapi.routing import Request
 from fastapi.routing import Response

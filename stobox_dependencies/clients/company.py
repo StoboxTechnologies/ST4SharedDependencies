@@ -1,6 +1,5 @@
 from stobox_dependencies.clients.http import BaseHTTPClient
 from stobox_dependencies.schemes.company import Company
-from stobox_dependencies.settings.conf import settings
 
 
 class CompanyHTTPClient(BaseHTTPClient):

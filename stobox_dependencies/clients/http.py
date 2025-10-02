@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 class BaseHTTPClient:
     EXC_CLASS: Type[HTTPClientError] = HTTPClientError
 
-    def __init__(self, base_url: HttpUrl, timeout: int = BASE_HTTP_CLIENT_TIMEOUT):
+    def __init__(self, base_url: HttpUrl, timeout: float = BASE_HTTP_CLIENT_TIMEOUT):
         self.base_url = str(base_url)
         self.timeout = timeout
 
