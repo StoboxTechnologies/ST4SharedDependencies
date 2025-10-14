@@ -41,6 +41,9 @@ class BaseHTTPClient:
     async def patch(self, url: str, **kwargs) -> httpx.Response:
         return await self._request('PATCH', url, **kwargs)
 
+    async def put(self, url: str, **kwargs) -> httpx.Response:
+        return await self._request('PUT', url, **kwargs)
+
     async def _request(self, method: str, url: str, **kwargs) -> httpx.Response:
         kwargs['headers'] = self.enrich_headers(kwargs.get('headers', {}))
         url = self.get_url(url)
