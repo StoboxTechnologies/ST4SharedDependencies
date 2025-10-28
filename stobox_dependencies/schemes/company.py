@@ -22,3 +22,18 @@ class Company(BaseModel):
     phone_number: str | None
     web_site: str | None
     user_id: int
+
+
+class TokenSchema(BaseModel):
+    address: str
+    snapshot_id: str
+    blockchain_id: str
+    project_id: int
+    symbol: str
+    name: str
+    decimals: int
+    treasury_address: str
+    transaction_hash: str | None
+    fireblocks_asset_id: str | None
+    is_shadow: bool
+    id: int
