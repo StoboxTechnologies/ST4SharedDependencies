@@ -1,6 +1,7 @@
 from fastapi import Depends
 from fastapi import Header
 
+from stobox_dependencies.api_dependencies.auth import current_user_id
 from stobox_dependencies.api_dependencies.auth import get_access_token
 from stobox_dependencies.api_dependencies.user import get_user_info
 from stobox_dependencies.clients import user_client
@@ -35,3 +36,14 @@ async def validate_2fa(
         await user_client.verify_2fa(token, secret_2fa)
     except HTTPClientError:
         raise ValidationError(ErrorMessages.INVALID_2FA)
+
+
+async def validate_otp_2fa(
+    secret_2fa: str | None = Header(None),
+    secret_otp: str = Header(),
+    user_id: int = Depends(current_user_id),
+) -> None:
+    try:
+        await user_client.verify_otp_2fa(user_id, secret_otp, secret_2fa)
+    except HTTPClientError as err:
+        raise ValidationError(err.json().get('detail', ErrorMessages.INVALID_OTP))
